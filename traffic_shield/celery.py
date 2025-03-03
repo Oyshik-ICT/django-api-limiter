@@ -3,23 +3,23 @@ import os
 from celery import Celery
 
 # Set the default Django settings module for the 'celery' program.
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'traffic_shield.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "traffic_shield.settings")
 
-app = Celery('traffic_shield')
+app = Celery("traffic_shield")
 app.conf.enable_utc = False
-app.conf.update(timezone = 'Asia/Dhaka')
+app.conf.update(timezone="Asia/Dhaka")
 
 
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.
 # - namespace='CELERY' means all celery-related configuration keys
 #   should have a `CELERY_` prefix.
-app.config_from_object('django.conf:settings', namespace='CELERY')
+app.config_from_object("django.conf:settings", namespace="CELERY")
 
-app.conf.beat_schedule ={
-    'refill_bucket': {
-        'task': 'ratelimiter.tasks.filling_buckets',
-        'schedule': 15.0,
+app.conf.beat_schedule = {
+    "refill_bucket": {
+        "task": "ratelimiter.tasks.filling_buckets",
+        "schedule": 15.0,
     }
 }
 
@@ -29,4 +29,4 @@ app.autodiscover_tasks()
 
 @app.task(bind=True)
 def debug_task(self):
-    print(f'Request: {self.request!r}')
+    print(f"Request: {self.request!r}")

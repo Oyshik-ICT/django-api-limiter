@@ -1,9 +1,12 @@
-from celery import shared_task
-from django_redis import get_redis_connection
-from traffic_shield.settings import max_size
 import logging
 
+from celery import shared_task
+from django_redis import get_redis_connection
+
+from traffic_shield.settings import max_size
+
 logger = logging.getLogger(__name__)
+
 
 @shared_task
 def filling_buckets():

@@ -33,6 +33,7 @@ env = environ.Env()
 environ.Env.read_env()
 
 max_size = env.int('MAX_SIZE')
+expiry = env.int('RATE_LIMITED_EXPIRY')
 
 
 # Application definition
