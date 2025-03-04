@@ -19,7 +19,7 @@ app.config_from_object("django.conf:settings", namespace="CELERY")
 app.conf.beat_schedule = {
     "refill_bucket": {
         "task": "ratelimiter.tasks.filling_buckets",
-        "schedule": 15.0,
+        "schedule": 1.0,
     }
 }
 
